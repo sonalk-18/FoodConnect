@@ -23,7 +23,7 @@ exports.createReward = async (req, res, next) => {
     const reward = await rewardModel.createReward({
       title: req.body.title,
       description: req.body.description,
-      imageUrl: req.body.imageUrl,
+      image: req.body.image,
       pointsRequired: req.body.pointsRequired,
       inventory: req.body.inventory ?? 0,
       isActive: req.body.isActive ?? true

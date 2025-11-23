@@ -7,7 +7,7 @@ const getCartByUser = async (userId) => {
       c.qty,
       f.name,
       f.price,
-      f.image_url AS imageUrl
+      f.image_url AS image
     FROM cart c
     INNER JOIN foods f ON f.id = c.food_id
     WHERE c.user_id = ?

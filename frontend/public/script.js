@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const resolveImageUrl = (value) => {
+  const resolveimage = (value) => {
     if (!value) return '';
     // Handle full URLs
     if (value.startsWith('http://') || value.startsWith('https://') || value.startsWith('data:')) {
@@ -362,8 +362,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     items.forEach((item) => {
-      const imagePath = item.image_url || item.imageUrl;
-      const imageSrc = imagePath ? resolveImageUrl(imagePath) : getPlaceholderImage();
+      const imagePath = item.image || item.image;
+      const imageSrc = imagePath ? resolveimage(imagePath) : getPlaceholderImage();
       const actionMarkup = getToken()
         ? `<button class="btn small add-to-cart" data-food-id="${item.id}">Add to cart</button>`
         : `<small>Login to add to cart</small>`;

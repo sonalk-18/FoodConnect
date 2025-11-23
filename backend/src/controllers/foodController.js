@@ -37,13 +37,13 @@ exports.createFood = async (req, res, next) => {
   }
 
   try {
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    const image = req.file ? `/uploads/${req.file.filename}` : null;
     const payload = {
       name: req.body.name,
       description: req.body.description,
       price: Number(req.body.price),
       category: req.body.category,
-      imageUrl
+      image
     };
 
     const food = await foodModel.createFood(payload);
@@ -65,17 +65,17 @@ exports.updateFood = async (req, res, next) => {
       return res.status(404).json({ message: 'Food not found' });
     }
 
-    const imageUrl =
+    const image =
       req.file?.filename
         ? `/uploads/${req.file.filename}`
-        : req.body.imageUrl || existing.image_url;
+        : req.body.image || existing.image;
 
     const updated = await foodModel.updateFood(req.params.id, {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price ? Number(req.body.price) : undefined,
       category: req.body.category,
-      imageUrl
+      image
     });
     return res.json({ status: 'success', message: 'Food updated', food: updated });
   } catch (error) {

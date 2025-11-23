@@ -4,7 +4,7 @@ const mapRow = (row) => ({
   id: row.id,
   title: row.title,
   description: row.description,
-  imageUrl: row.image_url,
+  image: row.image,
   pointsRequired: row.points_required,
   inventory: row.inventory,
   isActive: !!row.is_active,
@@ -23,16 +23,16 @@ const getRewardById = async (id, db = pool) => {
   return rows[0] ? mapRow(rows[0]) : null;
 };
 
-const createReward = async ({ title, description, imageUrl, pointsRequired, inventory = 0, isActive = true }) => {
+const createReward = async ({ title, description, image, pointsRequired, inventory = 0, isActive = true }) => {
   const [result] = await pool.query(
-    `INSERT INTO rewards (title, description, image_url, points_required, inventory, is_active)
+    `INSERT INTO rewards (title, description, image, points_required, inventory, is_active)
      VALUES (?, ?, ?, ?, ?, ?)`,
-    [title, description || null, imageUrl || null, pointsRequired, inventory, isActive ? 1 : 0]
+    [title, description || null, image || null, pointsRequired, inventory, isActive ? 1 : 0]
   );
   return getRewardById(result.insertId);
 };
 
-const updateReward = async (id, { title, description, imageUrl, pointsRequired, inventory, isActive }) => {
+const updateReward = async (id, { title, description, image, pointsRequired, inventory, isActive }) => {
   const fields = [];
   const params = [];
   if (title !== undefined) {
@@ -43,9 +43,9 @@ const updateReward = async (id, { title, description, imageUrl, pointsRequired, 
     fields.push('description = ?');
     params.push(description);
   }
-  if (imageUrl !== undefined) {
-    fields.push('image_url = ?');
-    params.push(imageUrl);
+  if (image !== undefined) {
+    fields.push('image = ?');
+    params.push(image);
   }
   if (pointsRequired !== undefined) {
     fields.push('points_required = ?');

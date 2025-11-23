@@ -45,15 +45,15 @@ const getFoodsByIds = async (ids = []) => {
   return rows;
 };
 
-const createFood = async ({ name, description, price, category, imageUrl }) => {
+const createFood = async ({ name, description, price, category, image }) => {
   const [result] = await pool.query(
-    'INSERT INTO foods (name, description, price, category, image_url) VALUES (?, ?, ?, ?, ?)',
-    [name, description, price, category, imageUrl]
+    'INSERT INTO foods (name, description, price, category, image) VALUES (?, ?, ?, ?, ?)',
+    [name, description, price, category, image]
   );
-  return { id: result.insertId, name, description, price, category, imageUrl };
+  return { id: result.insertId, name, description, price, category, image };
 };
 
-const updateFood = async (id, { name, description, price, category, imageUrl }) => {
+const updateFood = async (id, { name, description, price, category, image }) => {
   const fields = [];
   const params = [];
 
@@ -73,9 +73,9 @@ const updateFood = async (id, { name, description, price, category, imageUrl }) 
     fields.push('category = ?');
     params.push(category);
   }
-  if (imageUrl !== undefined) {
-    fields.push('image_url = ?');
-    params.push(imageUrl);
+  if (image !== undefined) {
+    fields.push('image = ?');
+    params.push(image);
   }
 
   if (!fields.length) return getFoodById(id);
