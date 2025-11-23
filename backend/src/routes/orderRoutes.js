@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.post('/', auth, validateOrder, orderController.createOrder);
 router.get('/my', auth, orderController.getMyOrders);
-router.get('/', auth, roles(['admin']), orderController.getOrders);
-router.put('/:id/status', auth, roles(['admin']), validateStatusUpdate, orderController.updateOrderStatus);
+router.get('/', auth, roles(['donor']), orderController.getOrders);
+router.put('/:id/status', auth, roles(['donor']), validateStatusUpdate, orderController.updateOrderStatus);
 
 module.exports = router;
 

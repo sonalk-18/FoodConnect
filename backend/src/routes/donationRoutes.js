@@ -7,10 +7,10 @@ const { validateDonation } = require('../utils/validators');
 const router = express.Router();
 
 router.post('/', auth, validateDonation, donationController.createDonation);
-router.get('/', auth, roles(['admin']), donationController.getDonations);
+router.get('/', auth, roles(['donor']), donationController.getDonations);
 router.get('/me', auth, donationController.getMyDonations);
 router.get('/:id', auth, donationController.getDonation);
-router.patch('/:id/status', auth, roles(['admin']), donationController.updateDonationStatus);
+router.patch('/:id/status', auth, roles(['donor']), donationController.updateDonationStatus);
 
 module.exports = router;
 

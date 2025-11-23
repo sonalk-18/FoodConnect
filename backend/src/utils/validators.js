@@ -19,7 +19,7 @@ const validateSignup = withValidationErrors([
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Valid email required').normalizeEmail(),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-  body('role').optional().isIn(['user', 'admin']).withMessage('Invalid role')
+  body('role').isIn(['donor', 'receiver']).withMessage('Role must be donor or receiver')
 ]);
 
 const validateLogin = withValidationErrors([
@@ -51,7 +51,7 @@ const validateOrder = withValidationErrors([
 ]);
 
 const validateRoleUpdate = withValidationErrors([
-  body('role').isIn(['user', 'admin']).withMessage('Role must be user or admin')
+  body('role').isIn(['donor', 'receiver']).withMessage('Role must be donor or receiver')
 ]);
 
 const validateCartItem = withValidationErrors([

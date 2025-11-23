@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     token: 'foodconnect_token',
     refresh: 'foodconnect_refresh',
     user: 'foodconnect_user'
+  };
 
   const body = document.body;
   const navLinks = document.getElementById('navLinks');
@@ -53,12 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const formData = new FormData(signupForm);
         try {
+          const selectedRole = formData.get('role') || role || 'receiver';
           const payload = {
             name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
             password: formData.get('password'),
-            role: role || 'receiver' // default to receiver if not set
+            role: selectedRole
           };
           const data = await request(`${API_BASE}/auth/signup`, { method: 'POST', body: payload });
           saveSession(data);
@@ -996,3 +998,19 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPoints();
   }
 });
+
+// Password visibility toggle function (global for onclick handlers)
+function togglePasswordVisibility(inputId, button) {
+  const input = document.getElementById(inputId);
+  const icon = button.querySelector('i');
+  
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+  } else {
+    input.type = 'password';
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+  }
+}

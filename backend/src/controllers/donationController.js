@@ -66,7 +66,8 @@ exports.getDonation = async (req, res, next) => {
     if (!donation) {
       return res.status(404).json({ message: 'Donation not found' });
     }
-    if (req.user.role !== 'admin' && donation.user_id !== req.user.id) {
+    // Users can only view their own donations
+    if (donation.user_id !== req.user.id) {
       return res.status(403).json({ message: 'Forbidden' });
     }
     return res.json(donation);

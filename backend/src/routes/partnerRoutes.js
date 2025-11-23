@@ -7,10 +7,10 @@ const { validatePartner } = require('../utils/validators');
 const router = express.Router();
 
 router.post('/', auth, validatePartner, partnerController.createApplication);
-router.get('/', auth, roles(['admin']), partnerController.getPartners);
+router.get('/', auth, roles(['donor']), partnerController.getPartners);
 router.get('/me', auth, partnerController.getMyPartners);
 router.get('/:id', auth, partnerController.getPartner);
-router.patch('/:id/status', auth, roles(['admin']), partnerController.updateStatus);
+router.patch('/:id/status', auth, roles(['donor']), partnerController.updateStatus);
 
 module.exports = router;
 

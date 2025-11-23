@@ -7,9 +7,9 @@ const { validateGame } = require('../utils/validators');
 const router = express.Router();
 
 router.get('/', gameController.listGames);
-router.post('/', auth, roles(['admin']), validateGame, gameController.createGame);
-router.put('/:id', auth, roles(['admin']), gameController.updateGame);
-router.delete('/:id', auth, roles(['admin']), gameController.deleteGame);
+router.post('/', auth, roles(['donor']), validateGame, gameController.createGame);
+router.put('/:id', auth, roles(['donor']), gameController.updateGame);
+router.delete('/:id', auth, roles(['donor']), gameController.deleteGame);
 
 module.exports = router;
 

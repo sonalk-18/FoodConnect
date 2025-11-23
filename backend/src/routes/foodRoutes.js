@@ -34,9 +34,9 @@ router.get('/', foodController.getFoods);
 router.get('/search', foodController.searchFoods);
 router.get('/filter', foodController.filterFoods);
 router.get('/:id', foodController.getFood);
-router.post('/', auth, roles(['admin']), upload.single('image'), validateFood, foodController.createFood);
-router.put('/:id', auth, roles(['admin']), upload.single('image'), foodController.updateFood);
-router.delete('/:id', auth, roles(['admin']), foodController.deleteFood);
+router.post('/', auth, roles(['donor']), upload.single('image'), validateFood, foodController.createFood);
+router.put('/:id', auth, roles(['donor']), upload.single('image'), foodController.updateFood);
+router.delete('/:id', auth, roles(['donor']), foodController.deleteFood);
 
 module.exports = router;
 

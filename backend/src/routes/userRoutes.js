@@ -6,7 +6,7 @@ const { validateRoleUpdate } = require('../utils/validators');
 
 const router = express.Router();
 
-router.use(auth, roles(['admin']));
+router.use(auth, roles(['donor']));
 
 router.get('/', userController.getUsers);
 router.put('/:id/role', validateRoleUpdate, userController.updateUserRole);

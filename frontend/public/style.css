@@ -482,6 +482,43 @@ section { padding: 50px 0; }
   color:var(--text);
   margin-bottom: .9rem;
 }
+
+/* Password input wrapper with toggle button */
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  padding-right: 45px; /* Space for the toggle button */
+  margin-bottom: .9rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  z-index: 1;
+}
+
+.password-toggle:hover {
+  color: var(--accent);
+}
+
+.password-toggle:focus {
+  outline: none;
+  color: var(--accent);
+}
 .login-form .form-options { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 .login-btn {
   width:100%;
