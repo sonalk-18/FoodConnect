@@ -223,6 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (!response.ok) {
+        // Handle 401 - token expired
+        if (response.status === 401) {
+          clearSession();
+          window.location.href = 'login.html';
+          throw new Error('Session expired. Please login again.');
+        }
+        
         let detail = {};
         try {
           detail = await response.json();

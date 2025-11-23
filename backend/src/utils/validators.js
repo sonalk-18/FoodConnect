@@ -66,7 +66,7 @@ const validateStatusUpdate = withValidationErrors([
 ]);
 
 const validateDonation = withValidationErrors([
-  body('donorType').isIn(['individual', 'restaurant', 'event', 'other']).withMessage('Invalid donor type'),
+  body('donorType').isIn(['Individual / Household', 'Restaurant / Cafe', 'Event / Caterer', 'Other']).withMessage('Invalid donor type. Must be: Individual / Household, Restaurant / Cafe, Event / Caterer, or Other'),
   body('contactName').trim().notEmpty().withMessage('Contact name is required'),
   body('contactPhone')
     .trim()

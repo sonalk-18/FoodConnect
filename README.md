@@ -82,7 +82,7 @@ CREATE TABLE cart (
 CREATE TABLE donations (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  donor_type ENUM('individual','restaurant','event','other') NOT NULL,
+  donor_type ENUM('Individual / Household','Restaurant / Cafe','Event / Caterer','Other') NOT NULL,
   contact_name VARCHAR(120) NOT NULL,
   contact_phone VARCHAR(32) NOT NULL,
   contact_email VARCHAR(160),
