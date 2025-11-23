@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ibb.co https://images.unsplash.com https://*.ibb.co https://*.unsplash.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self';">
+  <title>About Us - FoodConnect</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light">
+
+<!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo" aria-label="FoodConnect Home">
+        <img src="/images/logo.png" alt="FoodConnect Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23E2852E\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'20\' font-weight=\'bold\'%3EFC%3C/text%3E%3C/svg%3E'">
+        <span>FoodConnect</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active" target="_blank">About</a></li>
+        <li><a href="donate.html" target="_blank">Donate</a></li>
+        <li><a href="partners.html" target="_blank">Partners</a></li>
+        <li><a href="contact.html" target="_blank">Contact</a></li>
+        <li><a href="login.html" class="btn" target="_blank">Login</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    </nav>
+  </header>
+
+  
+  <section class="about modern-page">
+    <div class="page-header">
+      <img src="/images/logo.png" alt="FoodConnect Logo">
+      <h1>About FoodConnect</h1>
+      <p>Bridging the gap between surplus food and those who need it most.</p>
+    </div>
+
+    <div class="content">
+      <h2>Our Mission</h2>
+      <p>At FoodConnect, we aim to reduce food waste and combat hunger. By connecting households, restaurants, and businesses with NGOs and community kitchens, we ensure surplus food is never wasted and reaches people in need.</p>
+
+      <h2>Our Vision</h2>
+      <p>We envision a world where no edible food goes to waste, and every community has access to nutritious meals. We strive to create a connected ecosystem of donors, volunteers, and organizations working together for a hunger-free society.</p>
+
+      <h2>Our Values</h2>
+      <ul>
+        <li><i class="fas fa-hands-helping"></i> Compassion: Caring for the community and those in need.</li>
+        <li><i class="fas fa-leaf"></i> Sustainability: Reducing food waste and promoting eco-friendly practices.</li>
+        <li><i class="fas fa-network-wired"></i> Collaboration: Building a network of donors, volunteers, and NGOs.</li>
+        <li><i class="fas fa-bolt"></i> Efficiency: Ensuring food reaches beneficiaries quickly and safely.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Gaming Feature Section -->
+  <section class="gaming-feature modern-page">
+    <div class="page-header">
+      <i class="fas fa-gamepad fa-3x"></i>
+      <h1>Gaming with FoodConnect</h1>
+      <p>Play. Earn. Save. — Bringing fun and purpose together.</p>
+    </div>
+
+    <div class="content">
+      <h2>Why Gaming?</h2>
+      <p>FoodConnect isn’t just for NGOs and donors — it’s also for you! Our gaming feature allows regular users to earn exciting rewards and discount coupons simply by playing games within the app.</p>
+
+      <h2>What You Get</h2>
+      <ul>
+        <li><i class="fas fa-gift"></i> Earn rewards and coupons by playing fun mini-games.</li>
+        <li><i class="fas fa-coins"></i> Get discounts at partnered restaurants and cafes.</li>
+        <li><i class="fas fa-utensils"></i> Buy surplus fresh food from restaurants and café owners at affordable prices.</li>
+      </ul>
+
+      <p>With FoodConnect Games, saving food and enjoying fresh meals has never been this fun!</p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

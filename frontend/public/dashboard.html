@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ibb.co https://images.unsplash.com https://*.ibb.co https://*.unsplash.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self';">
+  <title>User Dashboard - FoodConnect</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="/images/logo.png" rel="icon">
+</head>
+<body class="light">
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="/images/logo.png" alt="FoodConnect Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23E2852E\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'20\' font-weight=\'bold\'%3EFC%3C/text%3E%3C/svg%3E'">
+        <span>FoodConnect</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><button id="logoutBtn" class="link-btn">Logout</button></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+    </nav>
+  </header>
+
+  <main class="modern-page dashboard-page">
+    <div class="page-header">
+      <img src="/images/logo.png" alt="FoodConnect Logo">
+      <h1>Welcome back, <span id="dashboardName">Changemaker</span></h1>
+      <p id="dashboardGreeting">Track your donations, partner applications, game points, and rewards in one place.</p>
+    </div>
+
+    <section class="dashboard-grid">
+      <article class="data-card highlight">
+        <h3>Total Points</h3>
+        <p class="balance" id="pointsBalance">0</p>
+        <small>Earn by donating food, playing games, and helping communities.</small>
+      </article>
+
+      <article class="data-card">
+        <h3>Donations Submitted</h3>
+        <p class="metric" id="donationCount">0</p>
+        <small>Latest three shown below.</small>
+      </article>
+
+      <article class="data-card">
+        <h3>Partner Applications</h3>
+        <p class="metric" id="partnerCount">0</p>
+        <small>Status auto-updates once reviewed.</small>
+      </article>
+    </section>
+
+    <section class="dashboard-columns">
+      <article class="data-card">
+        <div class="card-head">
+          <h3>Recent Donations</h3>
+          <a href="donate.html" class="link">New donation</a>
+        </div>
+        <ul id="dashboardDonations" class="timeline-list">
+          <li class="placeholder">No donations yet.</li>
+        </ul>
+      </article>
+
+      <article class="data-card">
+        <div class="card-head">
+          <h3>Partner Applications</h3>
+          <a href="partners.html" class="link">Apply</a>
+        </div>
+        <ul id="dashboardPartners" class="timeline-list">
+          <li class="placeholder">No applications yet.</li>
+        </ul>
+      </article>
+
+      <article class="data-card">
+        <div class="card-head">
+          <h3>Points Activity</h3>
+          <a href="games.html" class="link">Earn more</a>
+        </div>
+        <ul id="pointsHistory" class="timeline-list">
+          <li class="placeholder">Play a game or donate to earn points.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="dashboard-columns">
+      <article class="data-card">
+        <div class="card-head">
+          <h3>My Cart</h3>
+          <a href="index.html#menu" class="link">Browse meals</a>
+        </div>
+        <ul id="cartList" class="timeline-list">
+          <li class="placeholder">Add meals from the live menu to build your cart.</li>
+        </ul>
+        <div class="cart-actions">
+          <button id="placeOrderBtn" class="btn small">Place Order</button>
+          <p id="cartStatus" class="form-status" role="status"></p>
+        </div>
+      </article>
+
+      <article class="data-card">
+        <div class="card-head">
+          <h3>My Orders</h3>
+          <a href="index.html#menu" class="link">Continue ordering</a>
+        </div>
+        <ul id="orderList" class="timeline-list">
+          <li class="placeholder">Orders you place will appear here.</li>
+        </ul>
+        <p id="orderStatus" class="form-status" role="status"></p>
+      </article>
+    </section>
+
+    <section class="data-card">
+      <div class="card-head">
+        <h3>Rewards you can redeem</h3>
+        <p>Pick a reward and redeem it instantly using your points.</p>
+      </div>
+      <div id="dashboardRewards" class="reward-grid"></div>
+      <p id="rewardStatus" class="form-status" role="status"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

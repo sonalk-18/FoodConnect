@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Role - FoodConnect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Select Your Role</h2>
+        <form id="roleForm">
+            <label>
+                <input type="radio" name="role" value="donor" required>
+                Donor
+            </label>
+            <label>
+                <input type="radio" name="role" value="receiver" required>
+                Receiver
+            </label>
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('roleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const role = document.querySelector('input[name="role"]:checked').value;
+            window.location.href = `signup.html?role=${role}`;
+        });
+    </script>
+</body>
+</html>

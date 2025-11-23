@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ibb.co https://images.unsplash.com https://*.ibb.co https://*.unsplash.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self';">
+  <title>FoodConnect Games - Earn Rewards & Coupons</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light">
+
+<!-- Header -->
+<header>
+  <nav class="navbar">
+    <div class="logo">
+        <img src="/images/logo.png" alt="FoodConnect Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23E2852E\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'20\' font-weight=\'bold\'%3EFC%3C/text%3E%3C/svg%3E'">
+      <span>FoodConnect</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" target="_blank">About</a></li>
+      <li><a href="donate.html" target="_blank">Donate</a></li>
+      <li><a href="partners.html" target="_blank">Partners</a></li>
+      <li><a href="games.html" class="active" target="_blank">Games</a></li>
+      <li><a href="contact.html" target="_blank">Contact</a></li>
+      <li><a href="login.html" class="btn" target="_blank">Login</a></li>
+    </ul>
+    <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero gaming-hero">
+  <div class="hero-content">
+    <h1>Play Games, Earn Rewards <span>& Coupons</span></h1>
+    <p>FoodConnect Games lets you earn rewards, redeem coupons, and buy surplus fresh food from restaurants and cafés. Have fun while helping the community!</p>
+    <a href="#games-list" class="btn hero-btn">Start Playing</a>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works gaming-how">
+  <div class="page-header">
+    <h2>How It Works</h2>
+    <p>Follow these simple steps to start earning rewards and enjoy FoodConnect games:</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card glow-card">
+      <div class="step-number">1</div>
+      <i class="fas fa-user-circle step-icon"></i>
+      <h3>Sign Up / Login</h3>
+      <p>Create your FoodConnect account or login to start playing.</p>
+    </div>
+    <div class="step-card glow-card">
+      <div class="step-number">2</div>
+      <i class="fas fa-gamepad step-icon"></i>
+      <h3>Choose a Game</h3>
+      <p>Select from multiple mini-games and challenges available for you.</p>
+    </div>
+    <div class="step-card glow-card">
+      <div class="step-number">3</div>
+      <i class="fas fa-trophy step-icon"></i>
+      <h3>Play & Win</h3>
+      <p>Play games, complete challenges, and earn points, rewards, and coupons.</p>
+    </div>
+    <div class="step-card glow-card">
+      <div class="step-number">4</div>
+      <i class="fas fa-gift step-icon"></i>
+      <h3>Redeem Rewards</h3>
+      <p>Use your rewards for discounts at restaurants, cafés, or buy surplus fresh food at affordable prices.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Games -->
+<section id="games-list" class="games-section">
+  <div class="page-header">
+    <h2><i class="fas fa-gamepad"></i> Play & Earn</h2>
+    <p>Choose a game, play now, and start earning rewards!</p>
+  </div>
+
+  <div class="game-grid" id="gameGrid">
+    <p class="placeholder">Loading curated games…</p>
+  </div>
+</section>
+
+<!-- Rewards & Coupons Section -->
+<section class="rewards-section">
+  <div class="page-header center-text">
+    <h2><i class="fas fa-gift"></i> Rewards & Coupons</h2>
+    <p>Play games, collect points, and unlock amazing rewards! 🎉</p>
+  </div>
+
+  <div class="reward-carousel">
+    <div class="reward-track" id="rewardTrack">
+      <p class="placeholder">Rewards are loading…</p>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="gaming-benefits modern-page">
+  <div class="page-header">
+    <h2>Why Join FoodConnect Games?</h2>
+    <p>Enjoy games while making a positive impact on your community.</p>
+  </div>
+  <ul class="benefits-list">
+    <li><i class="fas fa-gift"></i> Earn rewards and discount coupons</li>
+    <li><i class="fas fa-coins"></i> Redeem points at restaurants and cafés</li>
+    <li><i class="fas fa-utensils"></i> Buy surplus fresh food at lower prices</li>
+    <li><i class="fas fa-heart"></i> Have fun while supporting hunger relief</li>
+  </ul>
+  <div class="cta-center">
+    <form id="gamePointsForm" class="inline-form" novalidate>
+      <select id="gameSelect" required>
+        <option value="">Select a game</option>
+      </select>
+      <input type="number" id="gamePoints" min="1" value="10" required>
+      <button type="submit" class="btn">Log Points</button>
+    </form>
+    <p id="gamePointsStatus" class="form-status" role="status"></p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">
+        <img src="/images/logo.png" alt="FoodConnect Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23E2852E\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'20\' font-weight=\'bold\'%3EFC%3C/text%3E%3C/svg%3E'">
+    <h3>FoodConnect</h3>
+  </div>
+  <p>© 2025 FoodConnect. Feeding Hope, Ending Waste.</p>
+  <div class="socials">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</footer>
+
+<a href="https://wa.me/918815451903?text=Hello%20FoodConnect%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services." class="whatsapp-chat" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html> 

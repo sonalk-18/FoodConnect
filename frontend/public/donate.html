@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ibb.co https://images.unsplash.com https://*.ibb.co https://*.unsplash.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self';">
+  <title>Donate Food - FoodConnect</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light">
+<!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo" aria-label="FoodConnect Home">
+        <img src="/images/logo.png" alt="FoodConnect Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23E2852E\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'20\' font-weight=\'bold\'%3EFC%3C/text%3E%3C/svg%3E'">
+        <span>FoodConnect</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" target="_blank">About</a></li>
+        <li><a href="donate.html" class="active" target="_blank">Donate</a></li>
+        <li><a href="partners.html" target="_blank">Partners</a></li>
+        <li><a href="contact.html" target="_blank">Contact</a></li>
+        <li><a href="login.html" class="btn" target="_blank">Login</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    </nav>
+  </header>
+
+
+  <section class="donate modern-page">
+    <div class="page-header">
+      <img src="/images/logo.png" alt="FoodConnect Logo">
+      <h1>Donate Your Surplus Food</h1>
+      <p>Every meal counts! Help us feed the hungry and reduce food waste.</p>
+
+
+    </div>
+
+    <div class="content">
+      <h2>Who Can Donate?</h2>
+      <p>Restaurants, households, cafes, caterers, events, and food businesses – anyone with surplus food can donate through FoodConnect.</p>
+
+      <h2>How It Works</h2>
+      <ol>
+        <li><i class="fas fa-clipboard-list"></i> <strong>Register:</strong> Sign up as a donor on FoodConnect.</li>
+        <li><i class="fas fa-utensils"></i> <strong>List Food:</strong> Add details about your surplus food – type, quantity, and pickup time.</li>
+        <li><i class="fas fa-hand-holding-heart"></i> <strong>NGO Matching:</strong> Our system connects your donation to a nearby NGO or community kitchen.</li>
+        <li><i class="fas fa-truck"></i> <strong>Pickup & Delivery:</strong> Volunteers collect and deliver the food safely.</li>
+      </ol>
+
+      <h2>Benefits of Donating</h2>
+      <ul>
+        <li><i class="fas fa-heart"></i> Make a positive impact on your community.</li>
+        <li><i class="fas fa-recycle"></i> Reduce food waste and contribute to sustainability.</li>
+        <li><i class="fas fa-smile-beam"></i> Help nourish people who need it most.</li>
+      </ul>
+
+      <h2>Submit a Donation Request</h2>
+      <form id="donationForm" class="card-form" novalidate>
+        <div class="row">
+          <div class="col">
+            <label for="donorType">Donor Type</label>
+            <select id="donorType" name="donorType" required>
+              <option value="">Select</option>
+              <option value="individual">Individual / Household</option>
+              <option value="restaurant">Restaurant / Cafe</option>
+              <option value="event">Event / Caterer</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="contactName">Contact Name</label>
+            <input type="text" id="contactName" name="contactName" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="contactPhone">Phone</label>
+            <input type="tel" id="contactPhone" name="contactPhone" required pattern="[0-9+\-\s]{7,15}">
+          </div>
+          <div class="col">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="contactEmail">
+          </div>
+        </div>
+
+        <label for="foodType">Food Type</label>
+        <input type="text" id="foodType" name="foodType" placeholder="e.g., Veg meals, sandwiches" required>
+
+        <label for="quantity">Quantity & Packaging</label>
+        <input type="text" id="quantity" name="quantity" placeholder="e.g., 30 meals, packed" required>
+
+        <label for="pickupAddress">Pickup Address</label>
+        <textarea id="pickupAddress" name="pickupAddress" required></textarea>
+
+        <label for="pickupWindow">Pickup Time Window</label>
+        <input type="text" id="pickupWindow" name="pickupWindow" placeholder="Today, 6-8 PM" required>
+
+        <label for="donationNotes">Notes (Allergens, storage, etc.)</label>
+        <textarea id="donationNotes" name="notes" rows="3"></textarea>
+
+        <button type="submit" class="btn">Submit Donation</button>
+        <p id="donationStatus" class="form-status" role="status"></p>
+      </form>
+
+      <div class="data-card">
+        <h3>Your Latest Donations</h3>
+        <ul id="donationList" class="timeline-list">
+          <li>Login to see your donation history.</li>
+        </ul>
+      </div>
+
+      <a href="signup.html" class="btn" target="_blank">Need an account? Sign up</a>
+    </div>
+  </section>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

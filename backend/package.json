@@ -1,0 +1,41 @@
+{
+  "name": "food-connect-backend",
+  "version": "1.0.0",
+  "description": "Food Connect backend service with authentication, roles, CRUD, orders, uploads, and security middleware.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "food-connect"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.2.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.0",
+    "mysql2": "^3.15.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sonalk-18/foodconnect67.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sonalk-18/foodconnect67/issues"
+  },
+  "homepage": "https://github.com/sonalk-18/foodconnect67#readme"
+}

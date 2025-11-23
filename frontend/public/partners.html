@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ibb.co https://images.unsplash.com https://*.ibb.co https://*.unsplash.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self';">
+  <title>Our Partners - FoodConnect</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light">
+<!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo" aria-label="FoodConnect Home">
+        <img src="/images/logo.png" alt="FoodConnect Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%23E2852E\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'20\' font-weight=\'bold\'%3EFC%3C/text%3E%3C/svg%3E'">
+        <span>FoodConnect</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" target="_blank">About</a></li>
+        <li><a href="donate.html" target="_blank">Donate</a></li>
+        <li><a href="partners.html" class="active" target="_blank">Partners</a></li>
+        <li><a href="contact.html" target="_blank">Contact</a></li>
+        <li><a href="login.html" class="btn" target="_blank">Login</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    </nav>
+  </header>
+
+
+  <section class="partners modern-page">
+    <div class="page-header">
+      <img src="/images/logo.png" alt="FoodConnect Logo">
+      <h1>Our Trusted Partners</h1>
+      <p>Working together to fight hunger and reduce food waste.</p>
+    </div>
+
+    <div class="content">
+      <h2>NGOs & Community Kitchens</h2>
+      <p>We collaborate with a wide network of NGOs, food banks, and community kitchens that help us reach people who need nutritious meals the most. Each partner is vetted to ensure safe food handling and timely delivery.</p>
+
+      <div class="partner-grid">
+        <div class="partner">
+          <i class="fas fa-hand-holding-heart"></i>
+          <h3>Helping Hands</h3>
+          <p>Specializes in feeding underprivileged children and families through regular meal programs.</p>
+        </div>
+        <div class="partner">
+          <i class="fas fa-seedling"></i>
+          <h3>Green Plate Initiative</h3>
+          <p>Focuses on sustainability and reducing food waste by redistributing surplus food efficiently.</p>
+        </div>
+        <div class="partner">
+          <i class="fas fa-hands"></i>
+          <h3>Community Care Network</h3>
+          <p>Provides essential meals and support services to local communities across multiple cities.</p>
+        </div>
+        <div class="partner">
+          <i class="fas fa-utensils"></i>
+          <h3>Meal for All</h3>
+          <p>Ensures every donation reaches the intended beneficiaries quickly, with quality and safety in mind.</p>
+        </div>
+      </div>
+
+      <h2>Become a Partner</h2>
+      <p>If your organization shares our mission of reducing food waste and feeding those in need, join FoodConnect as a partner. Together, we can create a larger impact and build a sustainable network for communities.</p>
+
+      <form id="partnerForm" class="card-form" novalidate>
+        <div class="row">
+          <div class="col">
+            <label for="organizationName">Organization Name</label>
+            <input type="text" id="organizationName" name="organizationName" required>
+          </div>
+          <div class="col">
+            <label for="organizationType">Organization Type</label>
+            <select id="organizationType" name="organizationType" required>
+              <option value="">Select</option>
+              <option value="ngo">NGO / Non-profit</option>
+              <option value="restaurant">Restaurant / Cafe</option>
+              <option value="volunteer">Volunteer Group</option>
+              <option value="sponsor">Sponsor</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="contactPerson">Contact Person</label>
+            <input type="text" id="contactPerson" name="contactPerson" required>
+          </div>
+          <div class="col">
+            <label for="partnerPhone">Phone</label>
+            <input type="tel" id="partnerPhone" name="phone" required pattern="[0-9+\-\s]{7,15}">
+          </div>
+        </div>
+
+        <label for="partnerEmail">Email</label>
+        <input type="email" id="partnerEmail" name="email" required>
+
+        <label for="location">City / Location</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="website">Website / Profile (optional)</label>
+        <input type="url" id="website" name="website" placeholder="https://">
+
+        <label for="documents">Document URL (drive link)</label>
+        <input type="url" id="documents" name="documentUrl" placeholder="https://drive.google.com/...">
+
+        <label for="partnerMessage">Tell us how you want to collaborate</label>
+        <textarea id="partnerMessage" name="message" rows="4"></textarea>
+
+        <button type="submit" class="btn">Submit Application</button>
+        <p id="partnerStatus" class="form-status" role="status"></p>
+      </form>
+
+      <div class="data-card">
+        <h3>Your Partner Applications</h3>
+        <ul id="partnerList" class="timeline-list">
+          <li>Login to track your applications.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
