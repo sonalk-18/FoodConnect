@@ -30,3 +30,4 @@ exports.error = (res, message = 'Error', statusCode = 400, errors = null) => {
   return res.status(statusCode).json(response);
 };
 
+

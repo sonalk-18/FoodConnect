@@ -68,7 +68,7 @@ exports.updateFood = async (req, res, next) => {
     const image =
       req.file?.filename
         ? `/uploads/${req.file.filename}`
-        : req.body.image || existing.image;
+        : req.body.image || existing.image_url || existing.image;
 
     const updated = await foodModel.updateFood(req.params.id, {
       name: req.body.name,

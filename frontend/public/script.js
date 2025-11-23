@@ -156,13 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const resolveimage = (value) => {
+  const resolveImageUrl = (value) => {
     if (!value) return '';
     // Handle full URLs
     if (value.startsWith('http://') || value.startsWith('https://') || value.startsWith('data:')) {
       return value;
     }
-    // Handle absolute paths
+    // Handle absolute paths (already starts with /)
     if (value.startsWith('/')) {
       return value;
     }
@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (value.includes('uploads/')) {
       return `/${value}`;
     }
+    // If it's just a filename, add /uploads/ prefix
     return `/uploads/${value}`;
   };
 
@@ -362,8 +363,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     items.forEach((item) => {
-      const imagePath = item.image || item.image;
-      const imageSrc = imagePath ? resolveimage(imagePath) : getPlaceholderImage();
+      // Check for image in multiple possible property names (image_url, imageUrl, image)
+      const imagePath = item.image_url || item.imageUrl || item.image || null;
+      const imageSrc = imagePath ? resolveImageUrl(imagePath) : getPlaceholderImage();
       const actionMarkup = getToken()
         ? `<button class="btn small add-to-cart" data-food-id="${item.id}">Add to cart</button>`
         : `<small>Login to add to cart</small>`;
