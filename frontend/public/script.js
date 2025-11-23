@@ -90,6 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const orderStatus = document.getElementById('orderStatus');
   const placeOrderBtn = document.getElementById('placeOrderBtn');
   const logoutBtn = document.getElementById('logoutBtn');
+  const receiverSection = document.getElementById('receiverSection');
+  const donorSection = document.getElementById('donorSection');
+  const allOrdersList = document.getElementById('allOrdersList');
+  const allOrdersStatus = document.getElementById('allOrdersStatus');
+  const totalRequestsCount = document.getElementById('totalRequestsCount');
 
   let currentThemeIndex = 0;
   let currentUser = null;
@@ -481,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!orderList) return;
     orderList.innerHTML = '';
     if (!orders.length) {
-      orderList.innerHTML = '<li class="placeholder">No orders yet. Add items to your cart and place an order.</li>';
+      orderList.innerHTML = '<li class="placeholder">No food requests yet. Add items to your cart and submit a request.</li>';
       return;
     }
 
@@ -630,8 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
           body: payload
         });
         const orderId = response.orderId || response.order?.id;
-        notifyCart(`Order placed successfully${orderId ? ` (#${orderId})` : ''}!`);
-        if (orderStatus) setStatus(orderStatus, 'Order placed successfully.');
+        notifyCart(`Food request submitted successfully${orderId ? ` (#${orderId})` : ''}!`);
+        if (orderStatus) setStatus(orderStatus, 'Food request submitted! Donor will review it soon.');
         await Promise.all([loadCart(), loadOrders(), loadPoints(), loadProfile()]);
       } catch (error) {
         notifyCart(error.message, 'error');
@@ -642,6 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Load receiver's own orders
   const loadOrders = async () => {
     if (!orderList || !getToken()) return;
     try {
@@ -653,6 +659,119 @@ document.addEventListener('DOMContentLoaded', () => {
       if (orderStatus) {
         setStatus(orderStatus, 'Unable to load orders right now.', 'error');
       }
+    }
+  };
+
+  // Load all orders for donor dashboard
+  const loadAllOrders = async () => {
+    if (!allOrdersList || !getToken()) return;
+    try {
+      const response = await request(`${API_BASE}/orders`, { auth: true });
+      const orders = response.orders || [];
+      renderAllOrders(orders);
+      if (totalRequestsCount) {
+        totalRequestsCount.textContent = `${orders.length} request${orders.length !== 1 ? 's' : ''}`;
+      }
+    } catch (error) {
+      console.error('Failed to load all orders', error);
+      if (allOrdersStatus) {
+        setStatus(allOrdersStatus, 'Unable to load food requests right now.', 'error');
+      }
+      allOrdersList.innerHTML = '<p class="placeholder">Unable to load food requests.</p>';
+    }
+  };
+
+  // Render all orders for donor with status management
+  const renderAllOrders = (orders = []) => {
+    if (!allOrdersList) return;
+    allOrdersList.innerHTML = '';
+    
+    if (!orders.length) {
+      allOrdersList.innerHTML = '<p class="placeholder">No food requests yet. Receivers can place orders from their dashboard.</p>';
+      return;
+    }
+
+    orders.forEach((order) => {
+      const items = order.items || [];
+      const customerName = order.customer_name || 'Unknown';
+      const customerEmail = order.customer_email || '';
+      const orderCard = document.createElement('div');
+      orderCard.className = 'order-card';
+      orderCard.innerHTML = `
+        <div class="order-header">
+          <div>
+            <strong>Request #${order.id}</strong>
+            <span class="badge ${order.status}">${order.status}</span>
+          </div>
+          <small>${formatDate(order.created_at)}</small>
+        </div>
+        <div class="order-customer">
+          <strong><i class="fas fa-user"></i> ${customerName}</strong>
+          ${customerEmail ? `<small>${customerEmail}</small>` : ''}
+        </div>
+        <div class="order-items">
+          <strong>Items Requested:</strong>
+          <ul class="mini-list">
+            ${items.map(item => 
+              `<li>${item.qty} × ${item.name} <span>₹${Number(item.lineTotal || item.price * item.qty).toFixed(2)}</span></li>`
+            ).join('')}
+          </ul>
+          <div class="order-total">
+            <strong>Total: ₹${Number(order.total).toFixed(2)}</strong>
+          </div>
+        </div>
+        <div class="order-actions">
+          ${order.status === 'placed' ? `
+            <button class="btn small approve-btn" data-order-id="${order.id}" data-status="approved">
+              <i class="fas fa-check"></i> Approve
+            </button>
+            <button class="btn small reject-btn" data-order-id="${order.id}" data-status="rejected">
+              <i class="fas fa-times"></i> Reject
+            </button>
+          ` : ''}
+          ${order.status === 'approved' ? `
+            <button class="btn small ready-btn" data-order-id="${order.id}" data-status="ready_for_pickup">
+              <i class="fas fa-box"></i> Ready for Pickup
+            </button>
+          ` : ''}
+          ${order.status === 'ready_for_pickup' ? `
+            <button class="btn small complete-btn" data-order-id="${order.id}" data-status="completed">
+              <i class="fas fa-check-circle"></i> Mark Completed
+            </button>
+          ` : ''}
+          ${['approved', 'ready_for_pickup'].includes(order.status) ? `
+            <button class="btn small cancel-btn" data-order-id="${order.id}" data-status="cancelled">
+              <i class="fas fa-ban"></i> Cancel
+            </button>
+          ` : ''}
+        </div>
+      `;
+      allOrdersList.appendChild(orderCard);
+    });
+
+    // Add event listeners for status update buttons
+    allOrdersList.querySelectorAll('button[data-order-id]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const orderId = e.target.closest('button').dataset.orderId;
+        const newStatus = e.target.closest('button').dataset.status;
+        await updateOrderStatus(orderId, newStatus);
+      });
+    });
+  };
+
+  // Update order status (for donor)
+  const updateOrderStatus = async (orderId, newStatus) => {
+    if (!getToken()) return;
+    try {
+      const response = await request(`${API_BASE}/orders/${orderId}/status`, {
+        method: 'PUT',
+        body: { status: newStatus },
+        auth: true
+      });
+      setStatus(allOrdersStatus, `Request #${orderId} status updated to ${newStatus}.`, 'success');
+      await loadAllOrders();
+    } catch (error) {
+      setStatus(allOrdersStatus, error.message || 'Failed to update status.', 'error');
     }
   };
 
@@ -972,7 +1091,18 @@ document.addEventListener('DOMContentLoaded', () => {
         dashboardName.textContent = user.name || 'Changemaker';
       }
       if (dashboardGreeting) {
-        dashboardGreeting.textContent = `You have ${user.points || 0} points to redeem today.`;
+        const roleText = user.role === 'donor' ? 'Manage food requests and system settings.' : `You have ${user.points || 0} points to redeem today.`;
+        dashboardGreeting.textContent = roleText;
+      }
+      // Update role indicator
+      const roleIndicator = document.getElementById('roleIndicator');
+      if (roleIndicator) {
+        if (user.role === 'donor') {
+          roleIndicator.textContent = '👑 Donor Dashboard - Manage all food requests';
+          roleIndicator.style.color = 'var(--accent)';
+        } else {
+          roleIndicator.textContent = '👤 Receiver Dashboard - Request food and track your orders';
+        }
       }
       if (pointsBalanceEl) {
         pointsBalanceEl.textContent = user.points || 0;
@@ -989,17 +1119,49 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     await loadProfile();
-    await Promise.all([loadDonations(), loadPartners(), loadPoints(), loadCart(), loadOrders()]);
+    
+    // Show appropriate section based on user role
+    const user = currentUser || readStoredUser();
+    if (user) {
+      if (user.role === 'donor') {
+        // Donor view: Show all food requests
+        if (receiverSection) receiverSection.style.display = 'none';
+        if (donorSection) donorSection.style.display = 'grid';
+        await Promise.all([loadDonations(), loadPartners(), loadPoints(), loadAllOrders()]);
+      } else {
+        // Receiver view: Show cart and own orders
+        if (receiverSection) receiverSection.style.display = 'grid';
+        if (donorSection) donorSection.style.display = 'none';
+        await Promise.all([loadDonations(), loadPartners(), loadPoints(), loadCart(), loadOrders()]);
+      }
+    } else {
+      // Fallback: try to load profile first
+      await loadProfile();
+      const updatedUser = currentUser || readStoredUser();
+      if (updatedUser) {
+        if (updatedUser.role === 'donor') {
+          if (receiverSection) receiverSection.style.display = 'none';
+          if (donorSection) donorSection.style.display = 'grid';
+          await loadAllOrders();
+        } else {
+          if (receiverSection) receiverSection.style.display = 'grid';
+          if (donorSection) donorSection.style.display = 'none';
+          await Promise.all([loadCart(), loadOrders()]);
+        }
+      }
+    }
   };
   initializeDashboard();
 
   // Preload data for logged-in users even outside dashboard
   if (getToken() && (donationList || partnerList || cartList || orderList)) {
     loadProfile();
+    const user = readStoredUser();
     if (donationList) loadDonations();
     if (partnerList) loadPartners();
-    if (cartList) loadCart();
-    if (orderList) loadOrders();
+    if (cartList && user?.role !== 'donor') loadCart();
+    if (orderList && user?.role !== 'donor') loadOrders();
+    if (allOrdersList && user?.role === 'donor') loadAllOrders();
     loadPoints();
   }
 });

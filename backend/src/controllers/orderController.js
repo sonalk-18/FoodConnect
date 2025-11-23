@@ -49,10 +49,15 @@ exports.createOrder = async (req, res, next) => {
   }
 };
 
+// Get all orders (for donor dashboard - shows all food requests)
 exports.getOrders = async (_req, res, next) => {
   try {
     const orders = await orderModel.getOrders();
-    return res.json({ status: 'success', orders });
+    return res.json({ 
+      status: 'success', 
+      orders,
+      message: 'All food requests from receivers'
+    });
   } catch (error) {
     return next(error);
   }
@@ -75,7 +80,8 @@ exports.updateOrderStatus = async (req, res, next) => {
     }
     return res.json({
       status: 'success',
-      message: 'Order status updated',
+      message: 'Food request status updated successfully',
+      order: updated,
       orderId: Number(req.params.id),
       orderStatus: req.body.status
     });

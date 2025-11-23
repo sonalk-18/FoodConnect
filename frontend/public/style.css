@@ -2453,6 +2453,233 @@ section.visible {
   }
 }
 
+/* =======================
+   Order Management (Donor Dashboard)
+======================= */
+.orders-management {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.order-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.order-header strong {
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.order-header small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.order-customer {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--highlight-bg);
+  border-radius: 8px;
+}
+
+.order-customer strong {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.order-customer small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.order-items {
+  margin-bottom: 1rem;
+}
+
+.order-items strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.order-total {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: right;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.order-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.order-actions .btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.approve-btn {
+  background: #28a745;
+  color: white;
+}
+
+.approve-btn:hover {
+  background: #218838;
+}
+
+.reject-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.reject-btn:hover {
+  background: #c82333;
+}
+
+.ready-btn {
+  background: #17a2b8;
+  color: white;
+}
+
+.ready-btn:hover {
+  background: #138496;
+}
+
+.complete-btn {
+  background: #28a745;
+  color: white;
+}
+
+.complete-btn:hover {
+  background: #218838;
+}
+
+.cancel-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #5a6268;
+}
+
+.mini-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.mini-list li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+}
+
+.mini-list li:last-child {
+  border-bottom: none;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge.placed {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.badge.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.badge.processing {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.badge.ready_for_pickup {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.badge.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+@media (max-width: 768px) {
+  .order-actions {
+    flex-direction: column;
+  }
+  
+  .order-actions .btn {
+    width: 100%;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
 /* Theme Toggle Animation */
 .theme-toggle {
   transition: all 0.3s ease;

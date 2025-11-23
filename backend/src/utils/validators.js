@@ -61,8 +61,8 @@ const validateCartItem = withValidationErrors([
 
 const validateStatusUpdate = withValidationErrors([
   body('status')
-    .isIn(['placed', 'processing', 'completed', 'cancelled'])
-    .withMessage('Invalid order status')
+    .isIn(['placed', 'approved', 'rejected', 'processing', 'ready_for_pickup', 'completed', 'cancelled'])
+    .withMessage('Invalid order status. Must be: placed, approved, rejected, processing, ready_for_pickup, completed, or cancelled')
 ]);
 
 const validateDonation = withValidationErrors([

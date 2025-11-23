@@ -36,6 +36,7 @@
       <img src="/images/logo.png" alt="FoodConnect Logo">
       <h1>Welcome back, <span id="dashboardName">Changemaker</span></h1>
       <p id="dashboardGreeting">Track your donations, partner applications, game points, and rewards in one place.</p>
+      <p id="roleIndicator" style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted);"></p>
     </div>
 
     <section class="dashboard-grid">
@@ -90,7 +91,8 @@
       </article>
     </section>
 
-    <section class="dashboard-columns">
+    <!-- Receiver View: Cart and Orders -->
+    <section id="receiverSection" class="dashboard-columns" style="display: none;">
       <article class="data-card">
         <div class="card-head">
           <h3>My Cart</h3>
@@ -100,20 +102,34 @@
           <li class="placeholder">Add meals from the live menu to build your cart.</li>
         </ul>
         <div class="cart-actions">
-          <button id="placeOrderBtn" class="btn small">Place Order</button>
+          <button id="placeOrderBtn" class="btn small">Place Order (Request Food)</button>
           <p id="cartStatus" class="form-status" role="status"></p>
         </div>
       </article>
 
       <article class="data-card">
         <div class="card-head">
-          <h3>My Orders</h3>
-          <a href="index.html#menu" class="link">Continue ordering</a>
+          <h3>My Food Requests</h3>
+          <a href="index.html#menu" class="link">Request more</a>
         </div>
         <ul id="orderList" class="timeline-list">
-          <li class="placeholder">Orders you place will appear here.</li>
+          <li class="placeholder">Your food requests will appear here.</li>
         </ul>
         <p id="orderStatus" class="form-status" role="status"></p>
+      </article>
+    </section>
+
+    <!-- Donor View: All Food Requests Management -->
+    <section id="donorSection" class="dashboard-columns" style="display: none;">
+      <article class="data-card" style="grid-column: 1 / -1;">
+        <div class="card-head">
+          <h3>All Food Requests from Receivers</h3>
+          <span id="totalRequestsCount" class="badge">0 requests</span>
+        </div>
+        <div id="allOrdersList" class="orders-management">
+          <p class="placeholder">Loading food requests...</p>
+        </div>
+        <p id="allOrdersStatus" class="form-status" role="status"></p>
       </article>
     </section>
 

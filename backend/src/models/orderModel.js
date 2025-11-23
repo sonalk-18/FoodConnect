@@ -43,7 +43,23 @@ const updateOrderStatus = async (orderId, status) => {
     status,
     orderId
   ]);
-  return result.affectedRows > 0;
+  if (result.affectedRows > 0) {
+    // Return the updated order with user info
+    const [rows] = await pool.query(
+      `SELECT o.*, u.name AS customer_name, u.email AS customer_email
+       FROM orders o
+       LEFT JOIN users u ON u.id = o.user_id
+       WHERE o.id = ?`,
+      [orderId]
+    );
+    if (rows.length > 0) {
+      return {
+        ...rows[0],
+        items: JSON.parse(rows[0].items || '[]')
+      };
+    }
+  }
+  return null;
 };
 
 module.exports = {
