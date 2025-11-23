@@ -508,16 +508,30 @@ section { padding: 50px 0; }
   align-items: center;
   justify-content: center;
   transition: color 0.2s;
-  z-index: 1;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
 }
 
 .password-toggle:hover {
   color: var(--accent);
+  background: rgba(226, 133, 46, 0.1);
 }
 
 .password-toggle:focus {
-  outline: none;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
   color: var(--accent);
+}
+
+.password-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.password-toggle i {
+  font-size: 16px;
+  pointer-events: none;
 }
 .login-form .form-options { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
 .login-btn {

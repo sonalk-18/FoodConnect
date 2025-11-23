@@ -1168,16 +1168,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Password visibility toggle function (global for onclick handlers)
 function togglePasswordVisibility(inputId, button) {
-  const input = document.getElementById(inputId);
-  const icon = button.querySelector('i');
-  
-  if (input.type === 'password') {
-    input.type = 'text';
-    icon.classList.remove('fa-eye');
-    icon.classList.add('fa-eye-slash');
-  } else {
-    input.type = 'password';
-    icon.classList.remove('fa-eye-slash');
-    icon.classList.add('fa-eye');
+  try {
+    const input = document.getElementById(inputId);
+    if (!input) {
+      console.error('Input field not found:', inputId);
+      return;
+    }
+    
+    // Handle button click - get the button element if event was passed
+    const buttonEl = button && button.tagName === 'BUTTON' ? button : button.currentTarget || button;
+    const icon = buttonEl ? buttonEl.querySelector('i') : null;
+    
+    if (!icon) {
+      console.error('Icon not found in button');
+      return;
+    }
+    
+    // Toggle password visibility
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+      buttonEl.setAttribute('aria-label', 'Hide password');
+    } else {
+      input.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+      buttonEl.setAttribute('aria-label', 'Show password');
+    }
+  } catch (error) {
+    console.error('Error toggling password visibility:', error);
   }
 }
