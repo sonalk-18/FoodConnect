@@ -41,14 +41,17 @@
           <input type="tel" id="signupPhone" name="phone" placeholder="Enter your phone number" required pattern="[0-9+\-\s]{7,15}">
         </div>
 
-        <!-- ROLE DROPDOWN (ADDED HERE) -->
+        <!-- ROLE DROPDOWN -->
         <div class="form-group">
           <label for="signupRole"><i class="fas fa-user-tag"></i> Choose Role</label>
           <select id="signupRole" name="role" required>
-            <option value="" disabled selected>Select your role</option>
-            <option value="donor">Donor</option>
-            <option value="receiver">Receiver</option>
+            <option value="receiver" selected>Receiver (General User)</option>
+            <option value="donor">Donor (Admin/Manager)</option>
           </select>
+          <small style="display: block; margin-top: 0.3rem; color: var(--muted); font-size: 0.85rem;">
+            <strong>Receiver:</strong> Browse, order, donate, play games<br>
+            <strong>Donor:</strong> All receiver permissions + manage system
+          </small>
         </div>
 
         <!-- PASSWORD -->

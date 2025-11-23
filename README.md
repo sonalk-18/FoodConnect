@@ -53,7 +53,7 @@ CREATE TABLE users (
   email VARCHAR(160) UNIQUE NOT NULL,
   phone VARCHAR(32),
   password VARCHAR(255) NOT NULL,
-  role ENUM('user','admin','vendor') DEFAULT 'user',
+  role ENUM('donor','receiver') DEFAULT 'receiver',
   points INT DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

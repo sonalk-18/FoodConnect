@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const formData = new FormData(signupForm);
         try {
+          // Default to 'receiver' (general user) if no role selected
           const selectedRole = formData.get('role') || role || 'receiver';
           const payload = {
             name: formData.get('name'),

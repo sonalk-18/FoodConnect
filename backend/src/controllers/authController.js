@@ -33,6 +33,8 @@ const sanitizeUser = (user) => ({
 });
 
 // SIGNUP
+// Note: 'receiver' is the default role for general users
+// 'donor' is the admin-level role with elevated permissions
 exports.signup = async (req, res, next) => {
   try {
     const { name, email, phone, password, role } = req.body;
@@ -44,11 +46,15 @@ exports.signup = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
+    // Default to 'receiver' if no role provided (general user role)
+    const userRole = role || 'receiver';
+
     const user = await userModel.createUser({
       name,
       email,
+      phone,
       password: hashedPassword,
-      role
+      role: userRole
     });
 
     const tokens = buildTokens(user);

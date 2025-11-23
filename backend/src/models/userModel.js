@@ -1,6 +1,8 @@
 const pool = require('./db');
 
 // Allowed roles
+// 'receiver' = Default role for general users (can browse, order, donate, etc.)
+// 'donor' = Admin-level role with elevated permissions (can manage system)
 const ALLOWED_ROLES = ['donor', 'receiver'];
 
 // Base fields (NO PASSWORD included here)

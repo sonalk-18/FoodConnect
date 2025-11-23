@@ -11,6 +11,34 @@ Authorization: Bearer <token>
 
 ---
 
+## 👥 User Roles & Permissions
+
+### **Receiver** (Default Role - General User)
+Default role assigned to new users. Can:
+- ✅ Browse foods (public catalog)
+- ✅ Add items to cart
+- ✅ Place orders
+- ✅ Submit donations
+- ✅ Apply as partner/NGO
+- ✅ View & redeem rewards
+- ✅ Play games and earn points
+- ✅ View own orders, donations, and points
+
+### **Donor** (Admin-Level Role)
+Elevated role with system management permissions. Can do everything a Receiver can, plus:
+- ✅ Manage foods (create, update, delete)
+- ✅ View & manage all orders (not just own)
+- ✅ View & manage all donations
+- ✅ Approve/reject partner applications
+- ✅ Manage rewards (create, update, delete)
+- ✅ Manage games (create, update, delete)
+- ✅ Manage users (view all users, change roles)
+- ✅ Upload food images
+
+**Note:** The `donor` role functions as the admin/manager role in the system.
+
+---
+
 ## 🔐 Authentication APIs (`/api/auth`)
 
 | Method | Endpoint | Auth Required | Description |
@@ -30,9 +58,10 @@ POST /api/auth/signup
   "email": "john@example.com",
   "phone": "1234567890",
   "password": "password123",
-  "role": "donor"  // or "receiver"
+  "role": "receiver"  // Default: "receiver" (general user). Use "donor" for admin-level access
 }
 ```
+**Note:** If `role` is not provided, defaults to `"receiver"` (general user role).
 
 **Login:**
 ```json
@@ -414,11 +443,31 @@ Authorization: Bearer <access_token>
 
 ---
 
-## 📋 Role-Based Access
+## 📋 Role-Based Access Summary
 
-- **Public** (No auth): Food catalog, rewards list, games list
-- **Authenticated** (Any user): Cart, orders, donations, partner applications, points
-- **Donor Only**: User management, food management, order management, donation management, partner management, reward management, game management
+### **Public** (No authentication required)
+- Browse foods (`GET /api/foods`)
+- View rewards (`GET /api/rewards`)
+- View games (`GET /api/games`)
+
+### **Authenticated Users** (Any role: receiver or donor)
+- Shopping cart operations
+- Place and view own orders
+- Submit and view own donations
+- Submit and view own partner applications
+- View and manage own points
+- Play games and earn points
+- Redeem rewards
+
+### **Donor Only** (Admin-level permissions)
+- User management (view all users, change roles)
+- Food management (create, update, delete foods)
+- Order management (view all orders, update status)
+- Donation management (view all donations, update status)
+- Partner management (view all applications, approve/reject)
+- Reward management (create, update, delete rewards)
+- Game management (create, update, delete games)
+- Image uploads
 
 ---
 
