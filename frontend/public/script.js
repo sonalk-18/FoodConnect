@@ -38,7 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname.endsWith('signup.html')) {
     const urlParams = new URLSearchParams(window.location.search);
     const role = urlParams.get('role');
+    const roleSelect = document.getElementById('signupRole');
     const roleDisplay = document.getElementById('roleDisplay');
+    if (roleSelect && role && (role === 'donor' || role === 'receiver')) {
+      roleSelect.value = role;
+    }
     if (roleDisplay && role) {
       roleDisplay.textContent = `Signing up as: ${role.charAt(0).toUpperCase() + role.slice(1)}`;
     }
